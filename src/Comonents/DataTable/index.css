@@ -1,0 +1,42 @@
+/* CSS */
+.header-class {
+    background-color: #f0f0f0; /* Header background color */
+}
+
+.body-class {
+    background-color: #ffffff; /* Body background color */
+}
+
+.row-class {
+    border-bottom: 1px solid #ccc !important; /* Add a line after each row */
+}
+
+
+/* Custom CSS */
+.custom-table{
+    border-radius: 0.375rem;
+    border: 1px solid grey;
+    padding-left: 2px;
+    overflow: hidden; 
+    font-size: medium;
+}
+
+.payment-status {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-weight: bold;
+}
+
+.paid {
+    color: green;
+}
+
+.pending {
+    color: orange;
+}
+
+.failed {
+    color: red;
+}
+
+
