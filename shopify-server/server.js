@@ -2,11 +2,16 @@ const express = require('express');
 const cors = require('cors');
 const { createRequestHandler } = require('@remix-run/node');
 const Shopify = require('shopify-api-node');
+require('dotenv').config()
+
+
+
+
 
 const shopify = new Shopify({
     shopName: 'app-shopping',
-    apiKey: 'a5686c46f479e144e5f21ea5e15e63a6',
-    password: 'ca981a88dfa6247d55896dd6204972e7',
+    apiKey: process.env.API_KEY,
+    password: process.env.PASSWORD,
     apiVersion: '2024-04',
 });
 
@@ -14,40 +19,19 @@ const app = express();
 
 app.use(cors());
 
-
-// const shopify = new Shopify({
-//     shopName: 'your-shop-name',
-//     apiKey: 'your-api-key',
-//     password: 'your-api-password',
-//     apiVersion: '2024-04', 
-//   });
-
-//   shopify.order.list({ status: 'any' })
-//     .then(orders => console.log(orders,'==============='))
-//     .catch(error => console.error('Error fetching orders:', error));
-
-
-
-
 app.get('/api/orders', async (req, res) => {
     try {
-
         console.log(shopify,'ssssssssssssssssss')
 
+         const { admin } = await authenticate.admin(request);
 
-        shopify.order.count({ status: 'any' })
-            .then(count => {
-                if (count > 0) {
-                    console.log('There are orders in the store');
-                } else {
-                    console.log('There are no orders in the store');
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching order count:', error);
-            });
+       
+        await admin.rest.resources.Order.all({
+            session: session,
+            status: "any",
+          });
 
-        res.json(orders);
+        // res.json(orders);
     } catch (error) {
         console.error('Error fetching orders:', error);
         res.status(500).json({ error: 'Failed to fetch orders' });
